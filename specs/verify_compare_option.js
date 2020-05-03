@@ -1,4 +1,4 @@
-describe('Vanguard Compare Fund App', function () {
+describe('Validate compare fund functionalities', function () {
     var EC = protractor.ExpectedConditions;
     let firstFundName="Vanguard Active Emerging Market Equity Fund";
     let firstFundIdentifier="VAN0221AU";
@@ -18,13 +18,7 @@ describe('Vanguard Compare Fund App', function () {
      });
  
      it('should have one add button enabled',function(){
-        /*  var EC = protractor.ExpectedConditions;
-         browser.driver.wait(function () {
-             let elem=element(by.css('#main > #compareTable #addButton0'));
-             browser.wait(EC.visibilityOf(elem), 10000);
-             return elem;
-         }); */
- 
+     
          var disabledButtonLocator="#selectorRow div.fundNameBlock p button.disableBtn"
          let disabledButtons = $$(disabledButtonLocator);
          expect(disabledButtons.count()).toBe(3);
@@ -68,9 +62,6 @@ describe('Vanguard Compare Fund App', function () {
         let searchResult = element(by.css('#compareTable #compareTableResults'));
         browser.wait(EC.visibilityOf(searchResult), 5000);
         expect(searchResult.isDisplayed()).toBe(true);
-
-       
-       
 
     })
 });

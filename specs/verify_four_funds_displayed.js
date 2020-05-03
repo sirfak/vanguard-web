@@ -8,8 +8,6 @@ describe('Vanguard Compare Fund App', function () {
     ]
 
 
-    let FundIdentifierArray
-
     beforeEach(function () {
         browser.manage().window().maximize();
         browser.get('https://tool.vanguardinvestments.com.au/mstar/au/fundcompare.htm?##target=fct');
@@ -22,27 +20,6 @@ describe('Vanguard Compare Fund App', function () {
 
     it('should allow to add fund by fund identifier', function () {
 
-        /* fundIdentifierArray.forEach((elem, index) => {
-
-            var inputFund = element(by.css(elem.selector));
-            browser.wait(EC.visibilityOf(inputFund), 10000);
-            inputFund.sendKeys(elem.id);
-
-            let searchResultLink = element(by.css('#searchLink'))
-            browser.wait(EC.visibilityOf(searchResultLink), 10000);
-            searchResultLink.click();
-
-            let searchResult = element(by.css('#compareTable #compareTableResults'));
-            browser.wait(EC.visibilityOf(searchResult), 5000);
-            
-
-            let fundIdInresult = element(by.xpath(" //td/strong[@id='identifierDataPnt']//ancestor::td//following-sibling::td[" + index + "]"));
-            browser.wait(EC.visibilityOf(fundIdInresult), 10000);
-            expect(fundIdInresult.getText()).toEqual(elem.id); 
-
-
-        }); 
- */
 
         var inputFund1 = element(by.css(fundIdentifierArray[0].selector));
         browser.wait(EC.visibilityOf(inputFund1), 10000);
@@ -79,8 +56,18 @@ describe('Vanguard Compare Fund App', function () {
         browser.wait(EC.visibilityOf(searchResult), 5000);
         expect(searchResult.isDisplayed()).toBe(true);
 
-      //validate each ids displayed
+        //validate each ids displayed
+        browser.sleep(5000);
+        var compareFundTable = element(by.css('#main > #compareTable'));
+        browser.wait(EC.visibilityOf(compareFundTable), 5000);
+
         
+        for (i = 1; i <= 4; i++) {
+            let newFundAdded = element(by.xpath("//td/strong[@id='identifierDataPnt']//ancestor::td//following-sibling::td["+i+"]"));
+            browser.wait(EC.visibilityOf(newFundAdded), 5000);
+            expect(newFundAdded.getText()).toBe(fundIdentifierArray[i-1].id);
+    
+          }
 
     })
 
