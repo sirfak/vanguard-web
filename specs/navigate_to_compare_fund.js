@@ -2,27 +2,32 @@ describe('Vanguard Compare Fund App', function () {
     var EC = protractor.ExpectedConditions;
     let homeUrl = 'https://www.vanguardinvestments.com.au/au/portal/homepage.jsp';
     let retailFundCompareUrl = 'https://www.vanguardinvestments.com.au/retail/ret/investments/product.html#/productType=retail';
-    
-    
+
+
     beforeEach(function () {
         browser.manage().window().maximize();
 
     });
 
-    it('shoud be able to navigate to compare funds', function () {
+    /* it('shoud be able to navigate to compare funds', function () {
         browser.get(homeUrl);
         var linkSmsf = element(by.css('p.showOnLrg a[href*="retail/jsp/home.jsp'))
         browser.wait(EC.visibilityOf(linkSmsf), 5000);
         linkSmsf.click();
-
-        var retailFundLink = element(by.css('div.fundFinder dt a[href="/retail/ret/investments/product.html#/productType=retail"'));
+        let retrailLink= element(by.cssContainingText('Retail managed funds'));
+        
         browser.wait(EC.visibilityOf(retailFundLink), 10000);
-        retailFundLink.click();
+        retrailLink.click();
+       expect(browser.getCurrentUrl()).toContain('/retail/ret/investments/product.html#/productType=retail');
+        //var retailFundLink = element(by.css('div.fundFinder dt a[href="/retail/ret/investments/product.html#/productType=retail"'));
+        
+        //browser.wait(EC.visibilityOf(retailFundLink), 10000);
+        //retailFundLink.click();
 
-        browser.wait(EC.visibilityOf(element(by.css('#listviewTable'))), 10000);
-        expect(element(by.css('#listviewTable')).isDisplayed()).toBe(true);
+        //browser.wait(EC.visibilityOf(element(by.css('#listviewTable'))), 10000);
+        //expect(element(by.css('#listviewTable')).isDisplayed()).toBe(true);
     });
-
+ */
 
     it('shoud be able to replace selected fund', function () {
 
@@ -82,7 +87,9 @@ describe('Vanguard Compare Fund App', function () {
         browser.wait(EC.visibilityOf(compareFundTable), 5000);
 
         //validate new fund added
+        browser.sleep(5000);
         let newFundAdded = element(by.xpath("//td/strong[@id='identifierDataPnt']//ancestor::td//following-sibling::td[1]"));
+        browser.wait(EC.visibilityOf(compareFundTable), 5000);
         expect(newFundAdded.getText()).toBeTruthy();
 
     });
@@ -127,29 +134,24 @@ describe('Vanguard Compare Fund App', function () {
 
 
 
-    /*  it('shoud be allow four funds to select', function () {
- 
-         browser.get(retailFundCompareUrl);
- 
-         var fundList = element.all(by.xpath("//input[@type='checkbox']"));
-         expect(fundList.count()).toBeGreaterThan(0);
-         [1, 2, 3, 4].forEach(index => {
-             let input = element(by.xpath("(//input[@type='checkbox'])[" + index + "]"));
-             browser.actions().mouseMove(input).click().perform();
-             browser.driver.sleep(10000);
-         })
- 
- 
-         let input = element(by.xpath("(//input[@type='checkbox'])[6]"));
-         expect(input.getAttribute('disabled')).toBe('disabled')
- 
- 
- 
- 
-         element(by.css('#floatingFooter #compareFunds')).click();
- 
-     });
-  */
+    it('shoud be allow four funds to select', function () {
+
+        browser.get(retailFundCompareUrl);
+
+        var fundList = element.all(by.xpath("//input[@type='checkbox']"));
+        expect(fundList.count()).toBeGreaterThan(0);
+        [1, 2, 3, 4].forEach(index => {
+            let input = element(by.xpath("(//input[@type='checkbox'])[" + index + "]"));
+            browser.executeScript("arguments[0].scrollIntoView();", input);
+            browser.executeScript("arguments[0].click();", input);
+        })
+
+
+        let input = element(by.xpath("(//input[@type='checkbox'])[6]"));
+        expect(input.getAttribute('disabled')).toBe('true')
+
+    });
+
 
 });
 

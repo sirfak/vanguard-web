@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "$(npm bin)/protractor conf.js",
-     "server": "$(npm bin)/webdriver-manager start"
+    "server": "$(npm bin)/webdriver-manager start"
   },
   "author": "mail2kumar.ajaysingh@gmail.com",
   "license": "ISC",
   "dependencies": {
     "protractor": "^5.4.4"
+  },
+  "devDependencies": {
+    "protractor-beautiful-reporter": "^1.3.6"
   }
 }
