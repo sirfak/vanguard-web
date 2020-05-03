@@ -1,0 +1,15 @@
+{
+  "name": "vanguard-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "$(npm bin)/protractor conf.js",
+     "server": "$(npm bin)/webdriver-manager start"
+  },
+  "author": "mail2kumar.ajaysingh@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "protractor": "^5.4.4"
+  }
+}
