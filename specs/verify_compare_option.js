@@ -1,4 +1,5 @@
 describe('Validate compare fund functionalities', function () {
+
     var EC = protractor.ExpectedConditions;
     let firstFundName="Vanguard Active Emerging Market Equity Fund";
     let firstFundIdentifier="VAN0221AU";
@@ -27,41 +28,51 @@ describe('Validate compare fund functionalities', function () {
 
     it('should allow to add fund by fund identifier', function () {
 
+        //input fund identifier
         var inputFund = element(by.css('#selectorRow div.fundNameBlock #fundInput0'));
         browser.wait(EC.visibilityOf(inputFund), 5000);
         inputFund.sendKeys(firstFundIdentifier);
 
 
+        //select the fund
         let searchResultLink = element(by.css('#searchLink'))
         browser.wait(EC.visibilityOf(searchResultLink), 5000);
         searchResultLink.click();
 
 
-        //Click Add button
+        //validate search result displayed
         let searchResult = element(by.css('#compareTable #compareTableResults'));
         browser.wait(EC.visibilityOf(searchResult), 5000);
         expect(searchResult.isDisplayed()).toBe(true);
 
+        //validate fund is added
         let fundIDInResult=element(by.xpath("//td/strong[@id='identifierDataPnt']//ancestor::td//following-sibling::td[1]"));
+        browser.wait(EC.visibilityOf(fundIDInResult), 5000);
         expect(fundIDInResult.getText()).toEqual(firstFundIdentifier);
 
     })
 
     it('should allow to add fund by fund name', function () {
 
+        //input fund name
         var inputFund = element(by.css('#selectorRow div.fundNameBlock #fundInput0'));
         browser.wait(EC.visibilityOf(inputFund), 5000);
         inputFund.sendKeys(firstFundName);
 
 
+        //select the fund
         let searchResultLink = element(by.css('#searchLink'))
         browser.wait(EC.visibilityOf(searchResultLink), 5000);
         searchResultLink.click();
 
 
+        //validate search result displayed
         let searchResult = element(by.css('#compareTable #compareTableResults'));
         browser.wait(EC.visibilityOf(searchResult), 5000);
         expect(searchResult.isDisplayed()).toBe(true);
+
+        //validate fund name selected
+        expect(element(by.cssContainingText('*',firstFundName)).isPresent()).toBeTruthy();
 
     })
 });
