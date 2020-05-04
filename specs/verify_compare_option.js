@@ -5,7 +5,8 @@ describe('Validate compare fund functionalities', function () {
     let firstFundIdentifier="VAN0221AU";
 
     beforeEach(function () {
-        browser.get('https://tool.vanguardinvestments.com.au/mstar/au/fundcompare.htm?##target=fct');
+        let host=  browser.params.appUrl;
+        browser.get(host+'/mstar/au/fundcompare.htm?##target=fct');
         var compareFundTable = element(by.css('#main > #compareTable'));
 
         browser.wait(EC.visibilityOf(compareFundTable), 5000);

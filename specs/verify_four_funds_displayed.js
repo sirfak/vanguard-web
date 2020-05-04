@@ -9,8 +9,9 @@ describe('Vanguard Compare Fund App', function () {
 
 
     beforeEach(function () {
+        let appCompareHostUrl=  browser.params.appCompareHostUrl;
         browser.manage().window().maximize();
-        browser.get('https://tool.vanguardinvestments.com.au/mstar/au/fundcompare.htm?##target=fct');
+        browser.get(appCompareHostUrl+'/mstar/au/fundcompare.htm?##target=fct');
         var compareFundTable = element(by.css('#main > #compareTable'));
 
         browser.wait(EC.visibilityOf(compareFundTable), 5000);
@@ -61,13 +62,13 @@ describe('Vanguard Compare Fund App', function () {
         var compareFundTable = element(by.css('#main > #compareTable'));
         browser.wait(EC.visibilityOf(compareFundTable), 5000);
 
-        
+
         for (i = 1; i <= 4; i++) {
-            let newFundAdded = element(by.xpath("//td/strong[@id='identifierDataPnt']//ancestor::td//following-sibling::td["+i+"]"));
+            let newFundAdded = element(by.xpath("//td/strong[@id='identifierDataPnt']//ancestor::td//following-sibling::td[" + i + "]"));
             browser.wait(EC.visibilityOf(newFundAdded), 5000);
-            expect(newFundAdded.getText()).toBe(fundIdentifierArray[i-1].id);
-    
-          }
+            expect(newFundAdded.getText()).toBe(fundIdentifierArray[i - 1].id);
+
+        }
 
     })
 

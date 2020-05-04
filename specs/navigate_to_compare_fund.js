@@ -1,7 +1,7 @@
 describe('Vanguard Compare Fund App', function () {
     var EC = protractor.ExpectedConditions;
-    let homeUrl = 'https://www.vanguardinvestments.com.au/au/portal/homepage.jsp';
-    let retailFundCompareUrl = 'https://www.vanguardinvestments.com.au/retail/ret/investments/product.html#/productType=retail';
+    let homeUrl = browser.params.appUrl;'/au/portal/homepage.jsp';
+    let retailFundCompareUrl = browser.params.appUrl+'/retail/ret/investments/product.html#/productType=retail';
 
 
     beforeEach(function () {
