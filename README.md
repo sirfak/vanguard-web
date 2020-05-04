@@ -40,7 +40,12 @@ c) To parameterize test to run with different host url(replace ENV_HOST with res
    ## What else could be done
 
    a) Test can be better optimized with waits
+
    b) Test can be made to run of different browser simultaneously with remote web driver
+
    c) Application can be tested for responsivness
+
    c) Test can be paramterized with fund names and identifiers
+
    d) Retrying failing tests can be achienved with help of other libraries
+   
